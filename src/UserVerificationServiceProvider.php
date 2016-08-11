@@ -6,7 +6,6 @@
  */
 namespace Jrean\UserVerification;
 
-use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 
 class UserVerificationServiceProvider extends ServiceProvider
@@ -18,25 +17,14 @@ class UserVerificationServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->registerUserVerification($this->app);
-    }
-
-    /**
-     * Register the user verification.
-     *
-     * @param  \Illuminate\Contracts\Foundation\Application  $app
-     * @return void
-     */
-    protected function registerUserVerification(Application $app)
-    {
-        $app->bind('user.verification', function ($app) {
+        $this->app->bind('user.verification', function ($app) {
             return new UserVerification(
                 $app->make('mailer'),
                 $app->make('db')->connection()->getSchemaBuilder()
             );
         });
 
-        $app->alias('user.verification', UserVerification::class);
+        $this->app->alias('user.verification', UserVerification::class);
     }
 
     /**
