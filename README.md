@@ -180,7 +180,7 @@ The given user is already verified.
 
 * `UserNotFoundException`
 
-No user found for the given e-mail adresse.
+No user found for the given e-mail address.
 
 ### Error View
 
